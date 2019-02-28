@@ -17,25 +17,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
-__all__ = ["Message", "CompressionType", "OffsetType"]
+__all__ = ["CompressionType", "OffsetType"]
 import datetime as dt
 import logging
 
 
 log = logging.getLogger(__name__)
 EPOCH = dt.datetime(1970, 1, 1)
-
-
-class Message(object):
-    """Message class.
-
-    :ivar response_code: Response code from Kafka
-    :ivar topic: Originating topic
-    :ivar payload: Message payload
-    :ivar key: (optional) Message key
-    :ivar offset: Message offset
-    """
-    __slots__ = []
 
 
 class CompressionType(object):

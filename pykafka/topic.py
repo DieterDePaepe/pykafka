@@ -249,7 +249,7 @@ class Topic(object):
         """Return a SimpleConsumer of this topic
 
         :param consumer_group: The name of the consumer group to join
-        :type consumer_group: bytes
+        :type consumer_group: str
         :param use_rdkafka: Use librdkafka-backed consumer if available
         :type use_rdkafka: bool
         """
@@ -268,7 +268,7 @@ class Topic(object):
         """Return a BalancedConsumer of this topic
 
         :param consumer_group: The name of the consumer group to join
-        :type consumer_group: bytes
+        :type consumer_group: str
         :param managed: If True, manage the consumer group with Kafka using the 0.9
             group management api (requires Kafka >=0.9))
         :type managed: bool

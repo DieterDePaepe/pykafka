@@ -372,11 +372,11 @@ class Producer(object):
             return False
         return time.time() * 1000 - start_time > self._pending_timeout_ms
 
-    def produce(self, message, partition_key=None, timestamp=None):
+    def produce(self, value, partition_key=None, timestamp=None):
         """Produce a message.
 
-        :param message: The message to produce (use None to send null)
-        :type message: bytes
+        :param value: The value of the message to produce (use None to send null)
+        :type value: bytes
         :param partition_key: The key to use when deciding which partition to send this
             message to. This key is passed to the `partitioner`, which may or may not
             use it in deciding the partition. The default `RandomPartitioner` does not
@@ -395,24 +395,24 @@ class Producer(object):
                     "but it got '%s'",
                     type(partition_key),
                 )
-            if message is not None and type(message) is not bytes:
+            if value is not None and type(value) is not bytes:
                 raise TypeError(
                     "Producer.produce accepts a bytes object as message, but it "
                     "got '%s'",
-                    type(message),
+                    type(value),
                 )
         if timestamp is not None and self._protocol_version < 1:
             raise RuntimeError("Producer.produce got a timestamp with protocol 0")
         if not self._running:
             raise ProducerStoppedException()
         if self._serializer is not None:
-            message, partition_key = self._serializer(message, partition_key)
+            value, partition_key = self._serializer(value, partition_key)
 
         partitions = list(self._topic.partitions.values())
         partition_id = self._partitioner(partitions, partition_key).id
 
         msg = Message(
-            value=message,
+            value=value,
             partition_key=partition_key,
             partition_id=partition_id,
             timestamp=timestamp,

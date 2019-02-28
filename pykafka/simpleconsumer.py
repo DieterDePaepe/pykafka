@@ -53,7 +53,8 @@ MAGIC_OFFSETS = [OffsetType.EARLIEST, OffsetType.LATEST]
 
 class SimpleConsumer(object):
     """
-    A non-balancing consumer for Kafka
+    A basic consumer for Kafka that does not automatically perform self-balancing (based on consumer_group).
+    A consumer can be used to retrieve :class:`pykafka.protocol.Message`s from a Kafka topic.
     """
     def __init__(self,
                  topic,

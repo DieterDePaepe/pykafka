@@ -5,13 +5,13 @@ from pkg_resources import parse_version
 from six import integer_types
 from zlib import crc32
 
-from ..common import CompressionType, Message
+from ..common import CompressionType
 from ..exceptions import MessageSetDecodeFailure
 from ..utils import Serializable, struct_helpers, compression
 from ..utils.compat import buffer
 
 
-class Message(Message, Serializable):
+class Message(Serializable):
     """Representation of a Kafka Message
 
     NOTE: Compression is handled in the protocol because of the way Kafka embeds
